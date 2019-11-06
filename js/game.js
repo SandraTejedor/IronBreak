@@ -17,14 +17,15 @@ const Game = {
         right: 39
     },
     arrBrick: [
-        [1, 1, 1, 1, 1, 1, 2],
-        [1, 4, 1, 1, 1, 1, 7],
-        [1, 1, 1, 3, 1, 1, 1],
-        [1, 1, 1, 3, 5, 3, 1],
-        [1, 1, 3, 1, 1, 5, 2]
+        [3, 7, 3, 1, 7, 1, 0],
+        [7, 6, 2, 1, 0, 6, 7],
+        [1, 1, 0, 1, 1, 0, 1],
+        [0, 1, 7, 0, 6, 1, 3],
+        [7, 1, 0, 1, 0, 2, 7]
     ],
     array: [],
     arrayBall: [],
+    pausa: true,
 
     init() {
         this.canvas = document.getElementById("myCanvas");
@@ -63,16 +64,17 @@ const Game = {
                 //this.win.draw()
                 //this.gameOver();
                 this.nivel += 1
+                this.generateLevels()
                 this.arrayBall = []
                 this.reset()
                 //let a = Math.floor(Math.random() * (8 - 1)) + 1;
-                this.arrBrick = [
+                /*this.arrBrick = [
                     [3, 1, 1, 1, 1, 1, 2],
                     [1, 1, 1, 1, 7, 1, 7],
                     [1, 1, 1, 3, 1, 2, 6],
                     [1, 1, 1, 3, 5, 3, 1],
                     [1, 1, 3, 1, 6, 5, 2]
-                ]
+                ]*/
             }
 
         }, 1000 / this.fps);
@@ -175,6 +177,26 @@ const Game = {
                             (this.height / 4 / longitud) * i
                         )
                     );
+                } else if (this.arrBrick[i][j] == 8) {
+                    this.array.push(
+                        new Brick8(
+                            this.ctx,
+                            this.width,
+                            this.height,
+                            (this.width / 1.1 / long) * j,
+                            (this.height / 4 / longitud) * i
+                        )
+                    );
+                } else if (this.arrBrick[i][j] == 9) {
+                    this.array.push(
+                        new Brick9(
+                            this.ctx,
+                            this.width,
+                            this.height,
+                            (this.width / 1.1 / long) * j,
+                            (this.height / 4 / longitud) * i
+                        )
+                    );
                 }
 
             }
@@ -213,7 +235,7 @@ const Game = {
             }
         })
 
-        //colision de la bola con el suelo
+        //colision de la bola con el suelo y se borren
         //borra del array todas las bolas que sobrepasan el suelo
         this.arrayBall.some((ball, idx) => {
             if (ball.posYBall > this.height) {
@@ -246,11 +268,19 @@ const Game = {
                     if (brick instanceof Brick5) { //los bricks5 (morados) devuelven la barra a su tamaño
                         this.bar.barWidth = 90
                     }
-                    if (brick instanceof Brick6) { //los bricks6 (blancos) suben a la barra la posicion
+                    if (brick instanceof Brick6) { //los bricks6 (blancos) suben a la barra la posicion Y
                         this.bar.posY = this.height - 150
                     }
-                    if (brick instanceof Brick7) { //los bricks7 (amarillos) devuelven la barra a su posicion
+                    if (brick instanceof Brick7) { //los bricks7 (amarillos) devuelven la barra a su posicion Y
                         this.bar.posY = this.height - 50
+                    }
+                    if (brick instanceof Brick8) { //los bricks7 (grises) aumentan la velocidad de la pelota
+                        ball.velX = 7
+                        ball.velY = 7
+                    }
+                    if (brick instanceof Brick9) { //los bricks7 (naranjas) devuelven la velocidad a la pelota
+                        ball.velX = 5
+                        ball.velY = 5
                     }
                     ball.velY *= -1;
                     this.array.splice(idx, 1);
@@ -275,17 +305,93 @@ const Game = {
         });
     },
 */
-    clear() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    },
-
     drawScore() {
         //con esta funcion pintamos el marcador
         this.scoreboard.update(this.score, this.nivel);
     },
+    generateLevels() {
+        if (this.nivel == 2) {
+            this.arrBrick = [
+                [3, 9, 1, 5, 0, 1, 2],
+                [0, 1, 0, 1, 2, 1, 7],
+                [1, 0, 1, 1, 1, 2, 8],
+                [9, 4, 1, 3, 5, 3, 1],
+                [1, 1, 9, 0, 1, 5, 2]
+            ]
+        }
+        if (this.nivel == 3) {
+            this.arrBrick = [
+                [3, 9, 7, 5, 1, 1, 2],
+                [1, 3, 1, 1, 7, 1, 7],
+                [7, 1, 9, 1, 1, 2, 8],
+                [9, 4, 6, 3, 5, 3, 1],
+                [1, 1, 9, 1, 1, 5, 2]
+            ]
+        }
+        if (this.nivel == 4) {
+            this.arrBrick = [
+                [3, 9, 7, 5, 1, 1, 2],
+                [1, 1, 1, 1, 7, 1, 7],
+                [1, 1, 1, 1, 1, 2, 8],
+                [3, 9, 7, 5, 1, 1, 2],
+                [1, 1, 1, 1, 7, 1, 7],
+            ]
+        }
+        if (this.nivel == 5) {
+            this.arrBrick = [
+                [9, 4, 6, 3, 5, 3, 1],
+                [1, 1, 9, 1, 1, 5, 2],
+                [1, 1, 1, 1, 1, 2, 8],
+                [3, 9, 7, 5, 1, 1, 2],
+                [1, 1, 1, 1, 7, 1, 7],
+            ]
+        }
+        if (this.nivel == 6) {
+            this.arrBrick = [
+                [6, 1, 9, 3, 1, 5, 2],
+                [1, 4, 1, 7, 5, 2, 8],
+                [4, 1, 1, 3, 1, 2, 6],
+                [1, 2, 1, 3, 5, 3, 4],
+                [7, 1, 3, 1, 6, 5, 2]
+            ]
+        }
+        if (this.nivel == 7) {
+            this.arrBrick = [
+                [1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 0, 1, 1],
+                [1, 1, 1, 1, 1, 0, 1]
+            ]
+        }
+    },
+    clear() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+
+
 
     gameOver() {
         //Gameover detiene el juego.
         clearInterval(this.interval);
+    },
+    stop() {
+        clearInterval(this.interval);
+        //this.pausa = true;
+    },
+    restart() {
+        setInterval(this.start());
+        //this.pausa = false;
     }
 };
+
+/*stop : function() {
+        if (!paused){
+          this.interval =   clearInterval(this.interval);
+          paused = true;
+        }else{
+          this.interval = setInterval(updateGameArea, 200000);
+          paused = false;
+        }
+
+    },*/

@@ -173,3 +173,53 @@ class Brick7 extends Brick {
 
     }
 }
+
+class Brick8 extends Brick {
+    constructor(ctx, w, h, posX, posY) {
+        super(ctx, w, h, posX, posY)
+        this.brickWidth = 30
+        this.brickHeight = 20
+        this.posX = posX + 40
+        this.posY = posY + 80
+    }
+
+    draw() {
+        //dibujo un ladrillo
+        this.ctx.beginPath()
+        this.ctx.strokeStyle = 'grey'
+        this.ctx.lineWidth = this.brickHeight;
+
+        //pinto el brick
+        this.ctx.moveTo(this.posX, this.posY)
+        this.ctx.lineTo(this.posX + this.brickWidth, this.posY)
+
+        this.ctx.stroke()
+        this.ctx.closePath()
+
+    }
+}
+
+class Brick9 extends Brick {
+    constructor(ctx, w, h, posX, posY) {
+        super(ctx, w, h, posX, posY)
+        this.brickWidth = 30
+        this.brickHeight = 20
+        this.posX = posX + 40
+        this.posY = posY + 80
+    }
+
+    draw() {
+        //dibujo un ladrillo
+        this.ctx.beginPath()
+        this.ctx.strokeStyle = 'orange'
+        this.ctx.lineWidth = this.brickHeight;
+
+        //pinto el brick
+        this.ctx.moveTo(this.posX, this.posY)
+        this.ctx.lineTo(this.posX + this.brickWidth, this.posY)
+
+        this.ctx.stroke()
+        this.ctx.closePath()
+
+    }
+}

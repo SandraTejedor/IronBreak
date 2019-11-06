@@ -39,3 +39,21 @@ body button {
     border-radius: 5px;
     margin-bottom: 20px;
 }
+
+.empezar {
+
+    align-items: center;
+}
+
+.stop {
+    background-color: #1d2ddb;
+}
+
+.reanudar {
+    background-color: #2efa23;
+}
+
+aside {
+    font-size: 17px;
+    font-family: "Verdana"
+}
