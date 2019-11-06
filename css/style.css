@@ -1,0 +1,41 @@
+body {
+    padding: 0;
+    text-align: center;
+    background-image: url("../img/fondo.jpg");
+    background-size: cover;
+
+}
+
+h1 {
+    font-size: 70px;
+    font-family: "Verdana";
+    color: #3aebee
+}
+
+.game-intro p {
+    font-size: 18px;
+    font-family: "Verdana"
+}
+
+.game-intro {
+    float: left;
+    padding: 0% 10%;
+    color: white;
+}
+
+.arrows-img {
+    width: 150px;
+    display: block;
+    justify-content: center;
+}
+
+body button {
+    font-size: 30px;
+    background-color: #a71063;
+    color: #fff;
+    padding: 20px 40px;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
