@@ -196,7 +196,7 @@ const Game = {
                 ball.posYBall + 20 >= this.bar.posY &&
                 ball.posXBall <= this.bar.posX + this.bar.barWidth &&
                 ball.posYBall <= this.bar.posY + this.bar.barHeight) {
-                //ball.posY += 10 // se sumo la posicion de Y
+                ball.posYBall -= 6 // le sumo la posicion de Y para que no me rebote en la barra
                 ball.velY *= -1
             }
         })
@@ -237,7 +237,7 @@ const Game = {
                     if (brick instanceof Brick6) { //los bricks6 (blancos) suben a la barra la posicion
                         this.bar.posY = this.height - 150
                     }
-                    if (brick instanceof Brick7) { //los bricks5 (amarillos) devuelven la barra a su posicion
+                    if (brick instanceof Brick7) { //los bricks7 (amarillos) devuelven la barra a su posicion
                         this.bar.posY = this.height - 50
                     }
                     ball.velY *= -1;
