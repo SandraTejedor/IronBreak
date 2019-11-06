@@ -10,17 +10,18 @@ const Game = {
     fps: 60,
     //obstacles: [],
     framesCounter: 0,
-    score: undefined,
+    score: 0,
+    nivel: 1,
     keys: {
         left: 37,
         right: 39
     },
     arrBrick: [
-        [3, 1, 4, 1, 1, 4, 2],
-        [1, 4, 1, 4, 7, 1, 7],
-        [1, 1, 1, 3, 1, 2, 6],
+        [1, 1, 1, 1, 1, 1, 2],
+        [1, 4, 1, 1, 1, 1, 7],
+        [1, 1, 1, 3, 1, 1, 1],
         [1, 1, 1, 3, 5, 3, 1],
-        [1, 1, 3, 1, 6, 5, 2]
+        [1, 1, 3, 1, 1, 5, 2]
     ],
     array: [],
     arrayBall: [],
@@ -59,8 +60,19 @@ const Game = {
             }
 
             if (!this.array.length) {
-                this.win.draw()
-                this.gameOver();
+                //this.win.draw()
+                //this.gameOver();
+                this.nivel += 1
+                this.arrayBall = []
+                this.reset()
+                //let a = Math.floor(Math.random() * (8 - 1)) + 1;
+                this.arrBrick = [
+                    [3, 1, 1, 1, 1, 1, 2],
+                    [1, 1, 1, 1, 7, 1, 7],
+                    [1, 1, 1, 3, 1, 2, 6],
+                    [1, 1, 1, 3, 5, 3, 1],
+                    [1, 1, 3, 1, 6, 5, 2]
+                ]
             }
 
         }, 1000 / this.fps);
@@ -72,7 +84,7 @@ const Game = {
         this.bar = new Bar(this.ctx, this.width, this.height, this.keys);
         this.scoreboard = ScoreBoard;
         this.scoreboard.init(this.ctx);
-        this.score = 0;
+        //this.score = 0;
         //this.ball = new Ball(this.ctx, this.width, this.height);
         this.generateBalls()
         this.gameover = new Gameover(this.ctx, this.width, this.height);
@@ -269,7 +281,7 @@ const Game = {
 
     drawScore() {
         //con esta funcion pintamos el marcador
-        this.scoreboard.update(this.score);
+        this.scoreboard.update(this.score, this.nivel);
     },
 
     gameOver() {
