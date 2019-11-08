@@ -8,7 +8,6 @@ const Game = {
     width: (window.innerWidth / 3) * 0.98,
     height: window.innerHeight * 0.98,
     fps: 60,
-    //obstacles: [],
     framesCounter: 0,
     score: 0,
     nivel: 1,
@@ -25,7 +24,6 @@ const Game = {
     ],
     array: [],
     arrayBall: [],
-    pausa: true,
 
     init() {
         this.canvas = document.getElementById("myCanvas");
@@ -87,9 +85,11 @@ const Game = {
         //generar los ladrillos al principio del juego
         this.generateBricks();
     },
+
     generateBalls() {
         this.arrayBall.push(new Ball(this.ctx, this.width, this.height));
     },
+
     generateBricks() {
         //genera los ladrillos y los mete en un array para pintarlo luego
         let longitud = this.arrBrick.length;
@@ -119,9 +119,7 @@ const Game = {
         for (let i = 0; i < this.arrayBall.length; i++) {
             this.arrayBall[i].draw()
         }
-        //this.ball.draw()
         this.drawBrick()
-
         this.drawScore()
     },
 
@@ -129,7 +127,6 @@ const Game = {
         for (let i = 0; i < this.arrayBall.length; i++) {
             this.arrayBall[i].move()
         }
-        //this.ball.move();
     },
 
     colision() {
@@ -171,7 +168,6 @@ const Game = {
                     ball.posXBall <= brick.posX + brick.brickWidth &&
                     ball.posYBall <= brick.posY + brick.brickHeight
                 ) {
-
                     switch (brick.num) {
                         case 0:
                         case 1: //caso basicos
@@ -203,7 +199,6 @@ const Game = {
                             ball.velY = 5;
                             break;
                     }
-
                     ball.velY *= -1;
                     this.array.splice(idx, 1);
                     this.score = this.score + 50;
@@ -215,6 +210,7 @@ const Game = {
             });
         });
     },
+
     drawBrick() {
         this.array.forEach(brick => brick.draw());
     },
@@ -223,6 +219,7 @@ const Game = {
         //con esta funcion pintamos el marcador
         this.scoreboard.update(this.score, this.nivel);
     },
+
     generateLevels() {
         if (this.nivel == 2) {
             this.arrBrick = [
@@ -279,6 +276,7 @@ const Game = {
             ];
         }
     },
+
     clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
@@ -287,20 +285,21 @@ const Game = {
         //Gameover detiene el juego.
         let audioGameOver = document.createElement("audio")
         audioGameOver.src = "img/gameover.mp3"
-        audioGameOver.volume = 0.8
+        audioGameOver.volume = 0.5
         audioGameOver.play()
         clearInterval(this.interval);
     },
+
     winOver() {
         this.win.draw()
         clearInterval(this.interval)
     },
+
     stop() {
         clearInterval(this.interval);
-        //this.pausa = true;
     },
+
     restart() {
         setInterval(this.start());
-        //this.pausa = false;
     }
 };
