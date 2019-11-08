@@ -13,13 +13,12 @@
     <div class="game-intro">
         <h1>IRONBREAK</h1>
         <p>Instrucciones: Consigue que la bola no traspase la barra <br> usando las teclas de los lados</p>
-        <button id="start-button" class="empezar">Empezar!</button>
-
+        <div class="centrar">
+            <button id="start-button" class="empezar">Empezar!</button>
+        </div>
         <button id="reanudar-button" class="reanudar">Reanudar</button>
         <button id="stop-button" class="stop">Parar</button>
-
         <aside>
-            <br><br>
             Leyenda de ladrillos: <br><br>
             Rojo: ladrillo básico <br>
             Azul: genera una bola más <br>
@@ -30,10 +29,10 @@
             Amarillo: devuelve la barra a su posición en Y <br>
             Gris: hace que la pelota vaya más rápido <br>
             Naranja: devuelve su velocidad a la pelota <br>
-
         </aside>
-
     </div>
+
+
     <canvas id="myCanvas"></canvas>
 
     <script src="./js/win.js"></script>

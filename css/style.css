@@ -23,12 +23,6 @@ h1 {
     color: white;
 }
 
-.arrows-img {
-    width: 150px;
-    display: block;
-    justify-content: center;
-}
-
 body button {
     font-size: 30px;
     background-color: #a71063;
@@ -40,17 +34,21 @@ body button {
     margin-bottom: 20px;
 }
 
-.empezar {
+.centrar {
+    display: flex;
+    justify-content: center;
+}
 
+.empezar {
     align-items: center;
 }
 
 .stop {
-    background-color: #1d2ddb;
+    background-color: #3c49da;
 }
 
 .reanudar {
-    background-color: #2efa23;
+    background-color: #00b150;
 }
 
 aside {

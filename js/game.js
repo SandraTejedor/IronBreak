@@ -51,25 +51,34 @@ const Game = {
                 this.gameOver();
             }
 
+            if (!this.array.length && this.nivel >= 7) {
+                let audioLevel = document.createElement("audio")
+                audioLevel.src = "img/levelup.mp3"
+                audioLevel.volume = 0.5
+                audioLevel.play()
+                winOver()
+            }
+
             if (!this.array.length) {
                 let audioLevel = document.createElement("audio")
                 audioLevel.src = "img/levelup.mp3"
-                audioLevel.volume = 0.8
+                audioLevel.volume = 0.5
                 audioLevel.play()
                 this.nivel += 1;
                 this.generateLevels();
                 this.arrayBall = [];
                 this.reset();
             }
+
         }, 1000 / this.fps);
     },
 
     reset() {
         //reset del game
-        this.background = new Background(this.ctx, this.width, this.height);
-        this.bar = new Bar(this.ctx, this.width, this.height, this.keys);
-        this.scoreboard = ScoreBoard;
-        this.scoreboard.init(this.ctx);
+        this.background = new Background(this.ctx, this.width, this.height)
+        this.bar = new Bar(this.ctx, this.width, this.height, this.keys)
+        this.scoreboard = ScoreBoard
+        this.scoreboard.init(this.ctx)
 
         this.generateBalls();
         this.gameover = new Gameover(this.ctx, this.width, this.height);
@@ -108,17 +117,17 @@ const Game = {
         this.background.draw();
         this.bar.draw();
         for (let i = 0; i < this.arrayBall.length; i++) {
-            this.arrayBall[i].draw();
+            this.arrayBall[i].draw()
         }
         //this.ball.draw()
-        this.drawBrick();
+        this.drawBrick()
 
-        this.drawScore();
+        this.drawScore()
     },
 
     moveAll() {
         for (let i = 0; i < this.arrayBall.length; i++) {
-            this.arrayBall[i].move();
+            this.arrayBall[i].move()
         }
         //this.ball.move();
     },
@@ -235,38 +244,38 @@ const Game = {
         }
         if (this.nivel == 4) {
             this.arrBrick = [
-                [3, 9, 7, 5, 1, 1, 2],
-                [1, 1, 1, 1, 7, 1, 7],
-                [1, 1, 1, 1, 1, 2, 8],
-                [3, 9, 7, 5, 1, 1, 2],
-                [1, 1, 1, 1, 7, 1, 7]
+                [3, 9, 7, 5, 7, 4, 2],
+                [5, 2, 9, 8, 7, 6, 7],
+                [1, 1, 6, 8, 1, 2, 8],
+                [3, 9, 7, 5, 1, 9, 2],
+                [7, 9, 4, 1, 7, 1, 7]
             ];
         }
         if (this.nivel == 5) {
             this.arrBrick = [
-                [9, 4, 6, 3, 5, 3, 1],
-                [1, 1, 9, 1, 1, 5, 2],
-                [1, 1, 1, 1, 1, 2, 8],
-                [3, 9, 7, 5, 1, 1, 2],
-                [1, 1, 1, 1, 7, 1, 7]
+                [9, 4, 6, 3, 5, 3, 5],
+                [8, 7, 9, 7, 9, 5, 2],
+                [4, 5, 1, 4, 1, 2, 8],
+                [5, 2, 9, 8, 7, 6, 7],
+                [1, 1, 6, 8, 1, 2, 8]
             ];
         }
         if (this.nivel == 6) {
             this.arrBrick = [
                 [6, 1, 9, 3, 1, 5, 2],
                 [1, 4, 1, 7, 5, 2, 8],
-                [4, 1, 1, 3, 1, 2, 6],
-                [1, 2, 1, 3, 5, 3, 4],
-                [7, 1, 3, 1, 6, 5, 2]
+                [9, 4, 6, 3, 5, 3, 5],
+                [8, 7, 9, 7, 9, 5, 2],
+                [4, 5, 1, 4, 1, 2, 8]
             ];
         }
         if (this.nivel == 7) {
             this.arrBrick = [
-                [1, 1, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 0, 1, 1],
-                [1, 1, 1, 1, 1, 0, 1]
+                [5, 2, 9, 8, 7, 6, 7],
+                [1, 1, 6, 8, 1, 2, 8],
+                [9, 4, 6, 3, 5, 3, 5],
+                [8, 7, 9, 7, 9, 5, 2],
+                [1, 4, 1, 7, 5, 2, 8]
             ];
         }
     },
@@ -282,7 +291,10 @@ const Game = {
         audioGameOver.play()
         clearInterval(this.interval);
     },
-
+    winOver() {
+        this.win.draw()
+        clearInterval(this.interval)
+    },
     stop() {
         clearInterval(this.interval);
         //this.pausa = true;
@@ -292,14 +304,3 @@ const Game = {
         //this.pausa = false;
     }
 };
-
-/*stop : function() {
-        if (!paused){
-          this.interval =   clearInterval(this.interval);
-          paused = true;
-        }else{
-          this.interval = setInterval(updateGameArea, 200000);
-          paused = false;
-        }
-
-    },*/
