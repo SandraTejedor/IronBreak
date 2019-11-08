@@ -27,4 +27,3 @@ class Brick {
 
     }
 }
-//['red', 'blue', 'pink', 'green', 'purple', 'white', 'yellow', 'grey', 'orange']

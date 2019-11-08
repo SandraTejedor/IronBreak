@@ -34,11 +34,11 @@ const Game = {
         //this.height = window.innerHeight * 0.98;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
+        this.reset(); // Reiniciamos configuración del juego
         this.start();
     },
 
     start() {
-        this.reset(); // Reiniciamos configuración del juego
         this.interval = setInterval(() => {
             this.drawAll();
             this.moveAll();
@@ -54,7 +54,7 @@ const Game = {
             if (!this.array.length) {
                 let audioLevel = document.createElement("audio")
                 audioLevel.src = "img/levelup.mp3"
-                audioLevel.volume = 0.7
+                audioLevel.volume = 0.8
                 audioLevel.play()
                 this.nivel += 1;
                 this.generateLevels();
@@ -137,7 +137,7 @@ const Game = {
                 ball.velY *= -1;
                 let audioBarra = document.createElement("audio")
                 audioBarra.src = "img/jump.wav"
-                audioBarra.volume = 0.2
+                audioBarra.volume = 0.1
                 audioBarra.play()
             }
         });
@@ -165,31 +165,31 @@ const Game = {
 
                     switch (brick.num) {
                         case 0:
-                        case 1:
+                        case 1: //caso basicos
                             break;
-                        case 2:
+                        case 2: //genera otra bola
                             this.generateBalls();
                             break;
-                        case 3:
+                        case 3: //suma 150 puntos
                             this.score = this.score + 150;
                             break;
-                        case 4:
+                        case 4: //hace la barra pequeña
                             this.bar.barWidth = 40;
                             break;
-                        case 5:
+                        case 5: //devuelve la barra a su tamaño
                             this.bar.barWidth = 90;
                             break;
-                        case 6:
+                        case 6: //sube la barra de posicion Y
                             this.bar.posY = this.height - 150;
                             break;
-                        case 7:
+                        case 7: //devuelve la barra a su posicion Y
                             this.bar.posY = this.height - 50;
                             break;
-                        case 8:
+                        case 8: //pelota va mas rapido
                             ball.velX = 7;
                             ball.velY = 7;
                             break;
-                        case 9:
+                        case 9: //pelota vuelve a su posicion
                             ball.velX = 5;
                             ball.velY = 5;
                             break;
@@ -278,11 +278,11 @@ const Game = {
         //Gameover detiene el juego.
         let audioGameOver = document.createElement("audio")
         audioGameOver.src = "img/gameover.mp3"
-        audioGameOver.volume = 0.7
+        audioGameOver.volume = 0.8
         audioGameOver.play()
         clearInterval(this.interval);
     },
-    /*
+
     stop() {
         clearInterval(this.interval);
         //this.pausa = true;
@@ -290,7 +290,7 @@ const Game = {
     restart() {
         setInterval(this.start());
         //this.pausa = false;
-    }*/
+    }
 };
 
 /*stop : function() {
